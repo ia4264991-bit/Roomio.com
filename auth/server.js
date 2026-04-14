@@ -21,12 +21,14 @@ const configuredOrigins = String(process.env.CLIENT_URL || "")
   .split(",")
   .map((v) => v.trim())
   .filter(Boolean);
+const allowedVercelPattern = /\.vercel\.app$/i;
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       if (/^http:\/\/localhost:\d+$/.test(origin)) return callback(null, true);
       if (/^http:\/\/127\.0\.0\.1:\d+$/.test(origin)) return callback(null, true);
+      if (allowedVercelPattern.test(origin)) return callback(null, true);
       if (configuredOrigins.includes(origin)) return callback(null, true);
       return callback(new Error(`CORS blocked for origin: ${origin}`));
     },
