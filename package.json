@@ -1,0 +1,14 @@
+{
+  "name": "roomio-com-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix auth\" \"npm run dev --prefix appFirst\"",
+    "dev:auth": "npm run dev --prefix auth",
+    "dev:frontend": "npm run dev --prefix appFirst",
+    "build": "npm install --prefix appFirst && npm run build --prefix appFirst"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
